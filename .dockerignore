@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build
+build
+dist
+coverage
+
+# Git
+.git
+.github
+.gitignore
+
+# IDE & Editor folders
+.idea
+.vscode
+*.swp
+*.swo
+
+# Logs and temporary files
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+*.bak
+*.tmp
+
+# Testing
+coverage
+.nyc_output

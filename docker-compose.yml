@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mcp-filesystem:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-filesystem
+    restart: unless-stopped
+    volumes:
+      - ./data:/data:ro  # Mount directories you want to expose to the server (read-only)
+    command: /data       # Pass the allowed directory as an argument
+    environment:
+      - NODE_ENV=production
+    # You can add network configuration if needed
+    # networks:
+    #   - mcp-network
+
+# Define networks if needed
+# networks:
+#   mcp-network:
+#     driver: bridge
