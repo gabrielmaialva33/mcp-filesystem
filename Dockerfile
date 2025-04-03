@@ -31,8 +31,8 @@ COPY --from=builder /app/pnpm-lock.yaml ./
 
 ENV NODE_ENV=production
 
-# Install only production dependencies
-RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm install --prod --frozen-lockfile
+# Install only production dependencies and skip prepare scripts
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm install --prod --frozen-lockfile --ignore-scripts
 
 # Set permissions for entrypoint
 RUN chmod +x build/src/index.js
