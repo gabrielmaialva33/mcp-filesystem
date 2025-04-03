@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/gabrielmaialva33/mcp-filesystem/master/.github/assets/icon.png" alt="MCP Filesystem" width="200">
+  <img src="https://raw.githubusercontent.com/gabrielmaialva33/mcp-filesystem/master/.github/assets/icon_mcp.png" alt="MCP Filesystem" width="200">
   <br>
   Secure <a href="https://modelcontextprotocol.io/introduction">MCP</a> Filesystem Server
   <br>
