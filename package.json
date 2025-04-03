@@ -1,11 +1,12 @@
 {
   "name": "mcp-filesystem",
   "version": "1.0.0",
-  "description": "MCP server for filesystem access",
+  "description": "MCP server for secure filesystem access",
   "keywords": [
     "typescript",
     "mcp",
-    "filesystem"
+    "filesystem",
+    "model-context-protocol"
   ],
   "author": {
     "name": "Gabriel Maia",
@@ -16,7 +17,8 @@
     "url": "https://github.com/gabrielmaialva33/mcp-filesystem.git"
   },
   "engines": {
-    "node": ">=22.13.1"
+    "node": ">=22.13.1",
+    "pnpm": ">=8.0.0"
   },
   "private": true,
   "main": "build/src/index.js",
@@ -29,10 +31,13 @@
     "build"
   ],
   "scripts": {
-    "build": "rimraf build && tsc && shx chmod +x build/*.js",
+    "dev": "ts-node src/index.ts",
+    "build": "rimraf build && tsc && shx chmod +x build/src/index.js",
+    "start": "node build/src/index.js",
     "watch": "tsc --watch",
-    "clean": "rimraf dist",
+    "clean": "rimraf build coverage",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest watch",
