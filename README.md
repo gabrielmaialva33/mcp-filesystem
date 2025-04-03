@@ -44,7 +44,7 @@ enforces strict path validation and only allows access to predefined directories
 
 - **[TypeScript](https://www.typescriptlang.org/)**
 - **[Node.js](https://nodejs.org/)**
-- **[MCP SDK](https://github.com/anthropics/model-context-protocol)**
+- **[MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk)**
 - **[Zod](https://zod.dev/)**
 - **[Docker](https://www.docker.com/)**
 - **[pnpm](https://pnpm.io/)**
