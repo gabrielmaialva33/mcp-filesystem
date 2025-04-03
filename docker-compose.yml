@@ -12,11 +12,30 @@ services:
     command: /data       # Pass the allowed directory as an argument
     environment:
       - NODE_ENV=production
-    # You can add network configuration if needed
-    # networks:
-    #   - mcp-network
+    # Health check to ensure the service is running correctly
+    healthcheck:
+      test: [ "CMD", "node", "-e", "process.stdout.write('health check')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+    # Network settings
+    networks:
+      - mcp-network
 
-# Define networks if needed
-# networks:
-#   mcp-network:
-#     driver: bridge
+# Define networks
+networks:
+  mcp-network:
+    driver: bridge
