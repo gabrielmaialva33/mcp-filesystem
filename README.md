@@ -28,6 +28,7 @@
   <a href="#computer-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#wrench-tools">Tools</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#package-installation">Installation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#gear-usage">Usage</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-license">License</a>
 </p>
 
@@ -67,7 +68,7 @@ enforces strict path validation and only allows access to predefined directories
 
 The following software must be installed:
 
-- **[Node.js](https://nodejs.org/en/)** (>=22.13.1)
+- **[Node.js](https://nodejs.org/en/)** (>=18.0.0)
 - **[Git](https://git-scm.com/)**
 - **[pnpm](https://pnpm.io/)** (>=8.0.0)
 - **[Docker](https://www.docker.com/)** (optional)
@@ -99,12 +100,27 @@ The following software must be installed:
   $ pnpm start /path/to/allowed/directory
 ```
 
+#### Using NPM Package
+
+```sh
+  # Install globally
+  $ npm install -g @gabrielmaialva33/mcp-filesystem
+
+  # Run the server
+  $ mcp-filesystem /path/to/allowed/directory
+  
+  # Or use with npx (no installation needed)
+  $ npx @gabrielmaialva33/mcp-filesystem /path/to/allowed/directory
+```
+
 #### Using Docker
 
 ```sh
-  # Build and run using Docker
-  $ docker build -t mcp-filesystem .
-  $ docker run -v /path/to/data:/data:ro mcp-filesystem /data
+  # Build the Docker image
+  $ docker build -t gabrielmaialva33/mcp-filesystem .
+  
+  # Run using Docker
+  $ docker run -i --rm -v /path/to/data:/data:ro gabrielmaialva33/mcp-filesystem /data
 ```
 
 #### Using Docker Compose
@@ -116,6 +132,77 @@ The following software must be installed:
   # Start the server
   $ docker-compose up -d
 ```
+
+<br>
+
+## :gear: Usage
+
+### Using with Claude Desktop
+
+Claude Desktop can be configured to use this MCP server for filesystem access. Add the following to your
+`claude_desktop_config.json`:
+
+#### Using NPX
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@gabrielmaialva33/mcp-filesystem",
+        "/Users/username/Desktop",
+        "/path/to/other/allowed/dir"
+      ]
+    }
+  }
+}
+```
+
+#### Using Docker
+
+Note: When using Docker, all directories must be mounted to `/projects` by default. Adding the `ro` flag will make the
+directory read-only.
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--mount",
+        "type=bind,src=/Users/username/Desktop,dst=/projects/Desktop",
+        "--mount",
+        "type=bind,src=/path/to/other/allowed/dir,dst=/projects/other/allowed/dir,ro",
+        "--mount",
+        "type=bind,src=/path/to/file.txt,dst=/projects/path/to/file.txt",
+        "gabrielmaialva33/mcp-filesystem",
+        "/projects"
+      ]
+    }
+  }
+}
+```
+
+### Available Tools
+
+The MCP Filesystem Server provides these tools:
+
+- **read_file**: Read a file's content
+- **read_multiple_files**: Read multiple files at once
+- **write_file**: Create or overwrite a file
+- **edit_file**: Make precise edits with diff preview
+- **create_directory**: Create directories recursively
+- **list_directory**: List directory contents
+- **directory_tree**: Get a recursive tree view
+- **move_file**: Move or rename files
+- **search_files**: Find files matching patterns
+- **get_file_info**: Get file metadata
+- **list_allowed_directories**: See accessible directories
 
 <br>
 
@@ -140,5 +227,5 @@ The following software must be installed:
 [MIT License](LICENSE)
 
 <p align="center"><img src="https://raw.githubusercontent.com/gabrielmaialva33/gabrielmaialva33/master/assets/gray0_ctp_on_line.svg?sanitize=true" /></p>
-<p align="center">&copy; 2017-present <a href="https://github.com/gabrielmaialva33/" target="_blank">Maia</a>
+<p align="center">&copy; 2024-present <a href="https://github.com/gabrielmaialva33/" target="_blank">Maia</a>
 </p>
