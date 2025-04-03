@@ -108,7 +108,7 @@ The following software must be installed:
 
   # Run the server
   $ mcp-filesystem /path/to/allowed/directory
-  
+
   # Or use with npx (no installation needed)
   $ npx @gabrielmaialva33/mcp-filesystem /path/to/allowed/directory
 ```
@@ -118,7 +118,7 @@ The following software must be installed:
 ```sh
   # Build the Docker image
   $ docker build -t gabrielmaialva33/mcp-filesystem .
-  
+
   # Run using Docker
   $ docker run -i --rm -v /path/to/data:/data:ro gabrielmaialva33/mcp-filesystem /data
 ```
@@ -219,7 +219,7 @@ The MCP Filesystem Server provides these tools:
 ### :writing_hand: **Author**
 
 | [![Gabriel Maia](https://avatars.githubusercontent.com/u/26732067?size=100)](https://github.com/gabrielmaialva33) |
-|-------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------------------------------------------------------- |
 | [Gabriel Maia](https://github.com/gabrielmaialva33)                                                               |
 
 ## License
