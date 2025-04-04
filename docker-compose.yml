@@ -8,13 +8,13 @@ services:
     container_name: mcp-filesystem
     restart: unless-stopped
     volumes:
-      - ./data:/data:ro  # Mount directories you want to expose to the server (read-only)
-    command: /data       # Pass the allowed directory as an argument
+      - ./data:/data:ro # Mount directories you want to expose to the server (read-only)
+    command: /data # Pass the allowed directory as an argument
     environment:
       - NODE_ENV=production
     # Health check to ensure the service is running correctly
     healthcheck:
-      test: [ "CMD", "node", "-e", "process.stdout.write('health check')" ]
+      test: ['CMD', 'node', '-e', "process.stdout.write('health check')"]
       interval: 30s
       timeout: 10s
       retries: 3

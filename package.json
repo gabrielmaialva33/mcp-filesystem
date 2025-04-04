@@ -1,12 +1,16 @@
 {
-  "name": "mcp-filesystem",
-  "version": "1.0.0",
+  "name": "@gabrielmaialva33/mcp-filesystem",
+  "version": "1.0.4",
   "description": "MCP server for secure filesystem access",
   "keywords": [
-    "typescript",
     "mcp",
     "filesystem",
-    "model-context-protocol"
+    "model-context-protocol",
+    "claude",
+    "anthropic",
+    "ai",
+    "file-operations",
+    "typescript"
   ],
   "author": {
     "name": "Gabriel Maia",
@@ -17,19 +21,23 @@
     "url": "https://github.com/gabrielmaialva33/mcp-filesystem.git"
   },
   "engines": {
-    "node": ">=22.13.1",
+    "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
   },
-  "private": true,
   "main": "build/src/index.js",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "mcp-server-filesystem": "build/src/index.js"
+    "mcp-filesystem": "build/src/index.js"
   },
   "files": [
-    "build"
+    "build",
+    "README.md",
+    "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "rimraf build && tsc && shx chmod +x build/src/index.js",
@@ -42,7 +50,8 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "pnpm run build"
   },
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/app"
