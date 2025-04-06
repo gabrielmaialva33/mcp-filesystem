@@ -243,11 +243,11 @@ The MCP Filesystem Server provides these tools:
 
 - **get_metrics**: View server performance metrics (v0.3.0+)
 - **execute_command**: Execute system commands securely (v0.3.1+)
-- **curl_request**: Execute HTTP requests to external APIs (v0.3.2+)
+- **curl_request**: Execute HTTP requests to external APIs (coming in v1.2.0)
 
-#### Using curl_request Tool
+#### Using curl_request Tool (Coming in v1.2.0)
 
-The `curl_request` tool allows you to make HTTP requests to external APIs:
+The `curl_request` tool will allow you to make HTTP requests to external APIs:
 
 ```javascript
 // Example: Making a GET request with authentication
