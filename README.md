@@ -142,6 +142,30 @@ The following software must be installed:
 Claude Desktop can be configured to use this MCP server for filesystem access. Add the following to your
 `claude_desktop_config.json`:
 
+#### Using Local Installation (Recommended)
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "mcp-filesystem",
+      "args": [
+        "/Users/gabrielmaia/Documents",
+        "/Users/gabrielmaia/Desktop",
+        "/Users/gabrielmaia/Downloads"
+      ]
+    }
+  }
+}
+```
+
+Make sure to make the executable available globally:
+
+```sh
+# Make the binary executable
+chmod +x /Users/gabrielmaia/.nvm/versions/node/v22.14.0/bin/mcp-filesystem
+```
+
 #### Using NPX
 
 ```json
