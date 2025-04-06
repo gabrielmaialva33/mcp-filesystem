@@ -17,12 +17,40 @@ import { Config } from '../../config/index.js'
 const execPromise = promisify(exec)
 
 // Regular expression to validate command safety
-const SAFE_COMMAND_REGEX = /^[a-zA-Z0-9_\-./\s|><&;]+$/
+const SAFE_COMMAND_REGEX = /^[a-zA-Z0-9_\-./\s:;,|><&{}()\[\]'"$%+*!?~=]+$/
+
+// Development-related commands that are allowed regardless of pattern matching
+const DEV_COMMANDS = [
+  'npm',
+  'pnpm',
+  'yarn',
+  'npx', // Package managers
+  'node',
+  'ts-node',
+  'tsc', // Node.js and TypeScript
+  'eslint',
+  'prettier', // Linting and formatting
+  'jest',
+  'vitest',
+  'mocha', // Testing
+  'git', // Version control
+  'find',
+  'grep',
+  'sed',
+  'awk', // File operations and text processing
+  'cat',
+  'ls',
+  'cd',
+  'cp',
+  'mv', // Basic file operations
+]
 
 // List of explicitly forbidden commands
 const FORBIDDEN_COMMANDS = [
   'rm -rf',
-  'rm -r',
+  'rm -rf /',
+  'rm -rf /*',
+  'rm -r /',
   'rmdir',
   'dd',
   'mkfs',
@@ -34,6 +62,8 @@ const FORBIDDEN_COMMANDS = [
   'chmod -R 777',
   'sudo',
   'su',
+  'doas',
+  ':(){:|:&};:', // Fork bomb
 ]
 
 // Schema for bash_execute arguments
@@ -78,6 +108,16 @@ function validateCommand(command: string): boolean {
       undefined,
       { command }
     )
+  }
+
+  // Check if it's an allowed development command
+  const baseCommand = command.split(' ')[0].trim()
+  const isDevCommand = DEV_COMMANDS.some(
+    (cmd) => baseCommand === cmd || baseCommand.endsWith(`/${cmd}`)
+  )
+
+  if (isDevCommand) {
+    return true
   }
 
   // Validate command against safe pattern

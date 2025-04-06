@@ -46,12 +46,7 @@ import { FileSystemError } from './errors/index.js'
 import { executeCommand, ExecuteCommandArgsSchema } from './utils/exec/index.js'
 // Import when needed
 // import { handleBashCommand, BashCommandArgsSchema } from './utils/bash/index.js'
-import {
-  // bashExecute,
-  BashExecuteArgsSchema,
-  // bashPipe,
-  BashPipeArgsSchema,
-} from './utils/bash/BashTools.js'
+import { BashExecuteArgsSchema, BashPipeArgsSchema } from './utils/bash/bash_tools.js'
 import { metrics } from './metrics/index.js'
 
 // Command-line argument processing
