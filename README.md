@@ -98,6 +98,9 @@ The following software must be installed:
 
   # Run the server (specify directory to allow access to)
   $ pnpm start /path/to/allowed/directory
+
+  # Or use configuration file
+  $ pnpm start --config=config.json
 ```
 
 #### Using NPM Package
@@ -111,6 +114,9 @@ The following software must be installed:
 
   # Or use with npx (no installation needed)
   $ npx @gabrielmaialva33/mcp-filesystem /path/to/allowed/directory
+
+  # Create a sample configuration file
+  $ npx @gabrielmaialva33/mcp-filesystem --create-config=config.json
 ```
 
 #### Using Docker
@@ -121,6 +127,9 @@ The following software must be installed:
 
   # Run using Docker
   $ docker run -i --rm -v /path/to/data:/data:ro gabrielmaialva33/mcp-filesystem /data
+
+  # Use with config file
+  $ docker run -i --rm -v /path/to/config.json:/app/config.json -v /path/to/data:/data gabrielmaialva33/mcp-filesystem --config=/app/config.json
 ```
 
 #### Using Docker Compose
@@ -227,16 +236,65 @@ The MCP Filesystem Server provides these tools:
 - **search_files**: Find files matching patterns
 - **get_file_info**: Get file metadata
 - **list_allowed_directories**: See accessible directories
+- **get_metrics**: View server performance metrics (v0.3.0+)
+- **execute_command**: Execute system commands securely (v0.3.1+)
 
 <br>
 
 ## :sparkles: Features
 
+### Core Features
+
 - **Secure Access**: Strict path validation prevents unauthorized access
 - **File Operations**: Read, write, edit, and move files
 - **Directory Operations**: Create, list, get tree views, and search directories
 - **Metadata Access**: View file and directory information
+- **Command Execution**: Securely execute system commands with strict validation
 - **Docker Support**: Easy deployment with Docker and Docker Compose
+
+### New Features in v0.3.0
+
+- **Structured Logging**: Detailed logging with different levels (debug, info, warn, error)
+- **Performance Metrics**: Track operation counts, errors, and execution times
+- **Configuration Management**: Support for JSON configuration files
+- **Path Caching**: Improved performance for frequently accessed paths
+- **Improved Error Handling**: Specialized error types with structured information
+- **File Size Validation**: Prevent loading excessively large files
+- **CLI Improvements**: Help command, version info, and config generation
+
+### Configuration Options
+
+You can create a configuration file using:
+
+```sh
+$ mcp-filesystem --create-config=config.json
+```
+
+Example configuration:
+
+```json
+{
+  "allowedDirectories": ["/path/to/allowed/dir1", "/path/to/allowed/dir2"],
+  "logLevel": "info",
+  "logFile": "/path/to/logs/mcp-filesystem.log",
+  "serverName": "secure-filesystem-server",
+  "serverVersion": "0.3.0",
+  "cache": {
+    "enabled": true,
+    "maxSize": 1000,
+    "ttlMs": 60000
+  },
+  "metrics": {
+    "enabled": true,
+    "reportIntervalMs": 60000
+  },
+  "security": {
+    "maxFileSize": 10485760,
+    "allowSymlinks": true,
+    "validateRealPath": true
+  }
+}
+```
 
 <br>
 
