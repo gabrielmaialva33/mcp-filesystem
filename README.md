@@ -238,6 +238,7 @@ The MCP Filesystem Server provides these tools:
 - **list_allowed_directories**: See accessible directories
 - **get_metrics**: View server performance metrics (v0.3.0+)
 - **execute_command**: Execute system commands securely (v0.3.1+)
+- **curl_request**: Execute HTTP requests to external APIs (v0.3.2+)
 
 <br>
 

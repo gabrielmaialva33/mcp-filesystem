@@ -47,6 +47,8 @@ import { executeCommand, ExecuteCommandArgsSchema } from './utils/exec/index.js'
 // Import bash tools
 import { BashExecuteArgsSchema, BashPipeArgsSchema } from './utils/bash/bash_tools.js'
 import { handleBashExecute, handleBashPipe } from './bash/tools/index.js'
+// Import curl tool
+import { CurlRequestArgsSchema, handleCurlRequest } from './utils/curl/index.js'
 import { metrics } from './metrics/index.js'
 
 // Command-line argument processing
@@ -365,6 +367,14 @@ async function runServer(config: Config) {
               'Allows for powerful command combinations with pipes. ' +
               'Results include both stdout and stderr.',
             inputSchema: zodToJsonSchema(BashPipeArgsSchema) as ToolInput,
+          },
+          {
+            name: 'curl_request',
+            description:
+              'Execute a curl request to an external HTTP API. ' +
+              'Allows specifying URL, method, headers, and data. ' +
+              'Useful for integrating with external services via HTTP.',
+            inputSchema: zodToJsonSchema(CurlRequestArgsSchema) as ToolInput,
           },
         ],
       }
@@ -750,6 +760,17 @@ async function runServer(config: Config) {
 
         case 'bash_pipe': {
           return await handleBashPipe(a, config)
+        }
+
+        case 'curl_request': {
+          const parsed = CurlRequestArgsSchema.safeParse(a)
+          if (!parsed.success) {
+            throw new FileSystemError(`Invalid arguments for ${name}`, 'INVALID_ARGS', undefined, {
+              errors: parsed.error.format(),
+            })
+          }
+
+          return await handleCurlRequest(parsed.data, config)
         }
 
         default:
