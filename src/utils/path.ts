@@ -38,20 +38,20 @@ export class PathValidationCache {
   /**
    * Get a validated path from the cache
    *
-   * @param path Original path
+   * @param p Original path
    * @returns Validated path if found in cache
    */
-  public get(path: string): string | undefined {
-    return this.cache.get(path)
+  public get(p: string): string | undefined {
+    return this.cache.get(p)
   }
 
   /**
    * Add a validated path to the cache
    *
-   * @param path Original path
+   * @param pat Original path
    * @param validatedPath Validated path
    */
-  public set(path: string, validatedPath: string): void {
+  public set(pat: string, validatedPath: string): void {
     // If cache is full, remove oldest entry
     if (this.cache.size >= this.maxSize) {
       const oldestKey = this.cache.keys().next().value
@@ -60,11 +60,11 @@ export class PathValidationCache {
       }
     }
 
-    this.cache.set(path, validatedPath)
+    this.cache.set(pat, validatedPath)
 
     // Set expiration for cache entry
     setTimeout(() => {
-      this.cache.delete(path)
+      this.cache.delete(pat)
     }, this.ttl)
   }
 
