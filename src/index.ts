@@ -44,9 +44,9 @@ import {
 } from './utils/tools.js'
 import { FileSystemError } from './errors/index.js'
 import { executeCommand, ExecuteCommandArgsSchema } from './utils/exec/index.js'
-// Import when needed
-// import { handleBashCommand, BashCommandArgsSchema } from './utils/bash/index.js'
+// Import bash tools
 import { BashExecuteArgsSchema, BashPipeArgsSchema } from './utils/bash/bash_tools.js'
+import { handleBashExecute, handleBashPipe } from './bash/tools/index.js'
 import { metrics } from './metrics/index.js'
 
 // Command-line argument processing
@@ -742,6 +742,14 @@ async function runServer(config: Config) {
               },
             ],
           }
+        }
+
+        case 'bash_execute': {
+          return await handleBashExecute(a, config)
+        }
+
+        case 'bash_pipe': {
+          return await handleBashPipe(a, config)
         }
 
         default:
