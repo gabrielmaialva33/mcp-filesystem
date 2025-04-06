@@ -225,6 +225,8 @@ directory read-only.
 
 The MCP Filesystem Server provides these tools:
 
+#### File System Operations
+
 - **read_file**: Read a file's content
 - **read_multiple_files**: Read multiple files at once
 - **write_file**: Create or overwrite a file
@@ -236,9 +238,39 @@ The MCP Filesystem Server provides these tools:
 - **search_files**: Find files matching patterns
 - **get_file_info**: Get file metadata
 - **list_allowed_directories**: See accessible directories
+
+#### System & Network Operations
+
 - **get_metrics**: View server performance metrics (v0.3.0+)
 - **execute_command**: Execute system commands securely (v0.3.1+)
 - **curl_request**: Execute HTTP requests to external APIs (v0.3.2+)
+
+#### Using curl_request Tool
+
+The `curl_request` tool allows you to make HTTP requests to external APIs:
+
+```javascript
+// Example: Making a GET request with authentication
+curl_request({
+  url: 'https://api.example.com/data',
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer your_token_here',
+  },
+})
+
+// Example: POST request with JSON data
+curl_request({
+  url: 'https://api.example.com/create',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  data: '{"name":"Example","value":123}',
+})
+```
+
+See the `docs/curl-tool-examples.md` file for more detailed examples.
 
 <br>
 
