@@ -26,6 +26,7 @@ import { z } from 'zod'
 import { zodToJsonSchema } from 'zod-to-json-schema'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { minimatch } from 'minimatch'
 
 // Import internal modules
 import { logger } from './logger/index.js'
@@ -42,8 +43,15 @@ import {
   WriteFileArgsSchema,
 } from './utils/tools.js'
 import { FileSystemError } from './errors/index.js'
-import { minimatch } from 'minimatch'
 import { executeCommand, ExecuteCommandArgsSchema } from './utils/exec/index.js'
+// Import when needed
+// import { handleBashCommand, BashCommandArgsSchema } from './utils/bash/index.js'
+import {
+  // bashExecute,
+  BashExecuteArgsSchema,
+  // bashPipe,
+  BashPipeArgsSchema,
+} from './utils/bash/BashTools.js'
 import { metrics } from './metrics/index.js'
 
 // Command-line argument processing
@@ -346,6 +354,22 @@ async function runServer(config: Config) {
               'Validates commands for safety and provides detailed output. ' +
               'Limited to basic system operations with security checks.',
             inputSchema: zodToJsonSchema(ExecuteCommandArgsSchema) as ToolInput,
+          },
+          {
+            name: 'bash_execute',
+            description:
+              'Execute a Bash command directly with output capture. ' +
+              'More flexible than execute_command but still with security restrictions. ' +
+              'Allows for direct access to Bash functionality.',
+            inputSchema: zodToJsonSchema(BashExecuteArgsSchema) as ToolInput,
+          },
+          {
+            name: 'bash_pipe',
+            description:
+              'Execute a sequence of Bash commands piped together. ' +
+              'Allows for powerful command combinations with pipes. ' +
+              'Results include both stdout and stderr.',
+            inputSchema: zodToJsonSchema(BashPipeArgsSchema) as ToolInput,
           },
         ],
       }
