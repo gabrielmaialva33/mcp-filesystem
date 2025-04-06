@@ -1,0 +1,21 @@
+{
+  "allowedDirectories": ["/path/to/allowed/dir1", "/path/to/allowed/dir2"],
+  "logLevel": "info",
+  "logFile": "/path/to/logs/mcp-filesystem.log",
+  "serverName": "secure-filesystem-server",
+  "serverVersion": "0.3.0",
+  "cache": {
+    "enabled": true,
+    "maxSize": 1000,
+    "ttlMs": 60000
+  },
+  "metrics": {
+    "enabled": true,
+    "reportIntervalMs": 60000
+  },
+  "security": {
+    "maxFileSize": 10485760,
+    "allowSymlinks": true,
+    "validateRealPath": true
+  }
+}
