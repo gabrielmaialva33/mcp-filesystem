@@ -62,7 +62,7 @@
     "@adonisjs/prettier-config": "^1.4.5",
     "@adonisjs/tsconfig": "^1.4.1",
     "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/config-conventional": "^20.0.0",
     "@types/diff": "^8.0.0",
     "@types/minimatch": "^6.0.0",
     "@types/node": "^24.3.0",
